@@ -24,6 +24,8 @@ public class Menu
       choice = PrintMenuAndGetResponse( );
 
       // Step 3: Respond to the menu choice.
+      while (choice != 3)
+      {
       switch (choice)
       {
         case 1: // A choice of 1 is to print all student names, IDs, and
@@ -41,6 +43,8 @@ public class Menu
         System.out.println("Illegal choice");
         break;
       }
+      choice = PrintMenuAndGetResponse( );
+    }
     }
     catch(SQLException e)
     {
