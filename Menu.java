@@ -24,19 +24,29 @@ public class Menu
       choice = PrintMenuAndGetResponse( );
 
       // Step 3: Respond to the menu choice.
-      while (choice != 3)
+      while (choice != 7)
       {
       switch (choice)
       {
-        case 1: // A choice of 1 is to print all student names, IDs, and
-        // their majors.
-        StudentMajorQuery(conn);
-        break;
-        case 2: // Print a list of student names, IDs and majors for a
-        // given graduation year entered by the user.
+        case 1:
         MovieTitleQuery(conn);
         break;
-        case 3: // To quit the program.
+        case 2:
+        //implement option 2
+        break;
+        case 3:
+        //implement option 3
+        break;
+        case 4:
+        //implement option 4
+        break;
+        case 5:
+        //implement option 5
+        break;
+        case 6:
+        //implement option 6
+        break;
+        case 7: // To quit the program.
         System.out.println("Exiting Program");
         break;
         default: // Illegal choice for integers other than 1, 2 and 3.
@@ -71,9 +81,13 @@ public class Menu
     Scanner keyboard = new Scanner(System.in);
     int response;
     System.out.println("Choose from one of the following options:");
-    System.out.println(" 1. List all Movies and their titles.");
-    System.out.println( " 2. List all Studios");
-    System.out.println(" 3. Quit the program");
+    System.out.println(" 1. List all movies.");
+    System.out.println( " 2. Insert a movie");
+    System.out.println(" 3. Delete a movie");
+    System.out.println(" 4. Update a studio name");
+    System.out.println(" 5. Count the Number of movies produced by a studio");
+    System.out.println(" 6. Count the number of movies a person is in");
+    System.out.println(" 7. Quit");
     System.out.print("Your choice ==> ");
     response = keyboard.nextInt();
     // Leave a blank line before printing the output response.
