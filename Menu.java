@@ -32,7 +32,7 @@ public class Menu
         break;
         case 2: // Print a list of student names, IDs and majors for a
         // given graduation year entered by the user.
-        StudentMajorsByGradYearQuery(conn);
+        MovieTitleQuery(conn);
         break;
         case 3: // To quit the program.
         System.out.println("Exiting Program");
@@ -67,10 +67,9 @@ public class Menu
     Scanner keyboard = new Scanner(System.in);
     int response;
     System.out.println("Choose from one of the following options:");
-    System.out.println(" 1. List all students and their majors.");
-    System.out.print( " 2. For a given year, list all students and ");
-    System.out.println("their majors.");
-    System.out.println(" 3. Quit the program%n");
+    System.out.println(" 1. List all Movies and their titles.");
+    System.out.println( " 2. List all Studios");
+    System.out.println(" 3. Quit the program");
     System.out.print("Your choice ==> ");
     response = keyboard.nextInt();
     // Leave a blank line before printing the output response.
@@ -82,23 +81,20 @@ public class Menu
   public static void StudentMajorQuery(Connection conn) throws SQLException
   {
     Statement stmt = conn.createStatement();
-    String qry = "select SName, StudentId, DName "
+    String qry = "select Title "
     +
-    "from Students, Departments "
-    +
-    "where MajorId = DId";
+    "from Movies ";
+
     ResultSet rs = stmt.executeQuery(qry);
     // Loop through the result set and print the output.
     // First -- print the output column headings.
     System.out.format("%n");
-    System.out.format("%-12s %4s %-20s%n", "Name", "ID", "Major");
+    System.out.format("%-12s%n", "Title");
     // Then -- print the body of the output table.
     while (rs.next())
     {
-      String sname = rs.getString("SName");
-      int sid = rs.getInt("StudentId");
-      String dname = rs.getString("DName");
-      System.out.format("%-12s %4d %-20s%n", sname, sid, dname);
+      String title = rs.getString("Title");
+      System.out.format("%-12s%n", title);
     }
     System.out.println();
     rs.close();
@@ -106,33 +102,24 @@ public class Menu
 
   // This function is for the query of finding names, IDs and majors
   // of those students graduating in a particular year.
-  public static void StudentMajorsByGradYearQuery(Connection conn)
+  public static void MovieTitleQuery(Connection conn)
   throws SQLException
   {
     Statement stmt = conn.createStatement();
     Scanner keyboard = new Scanner(System.in);
-    int gradYear;
-    System.out.println("Enter the graduation year: ");
-    gradYear = keyboard.nextInt();
-    String qry = "select SName, StudentId, DName "
+    String qry = "select Title "
     +
-    "from Students, Departments "
-    +
-    "where MajorId = DId "
-    +
-    "and GradYear = " + gradYear;
+    "from Movies ";
     ResultSet rs = stmt.executeQuery(qry);
     // Loop through the result set and print the output.
     // First -- print the output column headings.
     System.out.format("%n");
-    System.out.format("%-12s %4s %-20s%n", "Name", "ID", "Major");
+    System.out.format("%-12s%n", "Title");
     // Then -- print the body of the output table.
     while (rs.next())
     {
-      String sname = rs.getString("SName");
-      int sid = rs.getInt("StudentId");
-      String dname = rs.getString("DName");
-      System.out.format("%-12s %4d %-20s%n", sname, sid, dname);
+      String title = rs.getString("Title");
+      System.out.format("%-12s%n", title);
     }
     System.out.println( );
     rs.close();
