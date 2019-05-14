@@ -26,35 +26,35 @@ public class Menu
       // Step 3: Respond to the menu choice.
       while (choice != 7)
       {
-      switch (choice)
-      {
-        case 1:
-        MovieTitleQuery(conn);
-        break;
-        case 2:
-        //implement option 2
-        break;
-        case 3:
-        //implement option 3
-        break;
-        case 4:
-        //implement option 4
-        break;
-        case 5:
-        //implement option 5
-        break;
-        case 6:
-        //implement option 6
-        break;
-        case 7: // To quit the program.
-        System.out.println("Exiting Program");
-        break;
-        default: // Illegal choice for integers other than 1, 2 and 3.
-        System.out.println("Illegal choice");
-        break;
-      }
+        switch (choice)
+        {
+          case 1:
+            MovieTitleQuery(conn);
+            break;
+          case 2:
+            //implement option 2
+            break;
+          case 3:
+            //implement option 3
+            break;
+          case 4:
+            //implement option 4
+            break;
+          case 5:
+            //implement option 5
+            break;
+          case 6:
+            //implement option 6
+            break;
+          case 7: // To quit the program.
+            System.out.println("Exiting Program");
+            break;
+          default: // Illegal choice for integers other than 1, 2 and 3.
+            System.out.println("Illegal choice");
+            break;
+        }
       choice = PrintMenuAndGetResponse( );
-    }
+      }
     }
     catch(SQLException e)
     {
@@ -142,4 +142,4 @@ public class Menu
     System.out.println( );
     rs.close();
   }
-  }
+}
