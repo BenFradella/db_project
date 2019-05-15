@@ -50,6 +50,9 @@ public class Menu
                     case 7: // To quit the program.
                         System.out.println("Exiting Program");
                         break;
+                    case 8:
+                        AddActingCredit(conn);
+                        break;
                     default: // Illegal choice for integers other than 1, 2 and 3.
                         System.out.println("Illegal choice");
                         break;
@@ -89,6 +92,7 @@ public class Menu
         System.out.println(" 5. Count the movies produced by each studio");
         System.out.println(" 6. Count the number of movies a person is in");
         System.out.println(" 7. Quit");
+        System.out.println(" 8. Add acting credit");
         System.out.print("Your choice ==> ");
         response = keyboard.nextInt();
         // Leave a blank line before printing the output response.
@@ -202,5 +206,28 @@ public class Menu
         int count = rs.getInt("count");
         
         System.out.format("\n%s has appeared in %d of your movies\n\n", name, count);
+    }
+
+    public static void AddActingCredit(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.print("Title of the movie: ");
+        String title = keyboard.nextLine();
+        System.out.print("Name of Actor/Actress: ");
+        String name = keyboard.nextLine();
+        System.out.print("Role they played in the movie: ");
+        String role = keyboard.nextLine();
+
+        String qry = String.format("INSERT INTO ActingCredits SET MovieName='%s', PersonName='%s', Role='%s'", title, name, role);
+
+        try {
+            stmt.executeQuery(qry);
+            System.out.println("\nSuccess\n");
+        } catch(SQLIntegrityConstraintViolationException e) {
+            System.out.println("\nperson or movie does not exist\n");
+        }
+
+
     }
 }
