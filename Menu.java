@@ -35,7 +35,7 @@ public class Menu
                         InsertMovie(conn);
                         break;
                     case 3:
-                        //implement option 3
+                        DeleteMovie(conn);
                         break;
                     case 4:
                         //implement option 4
@@ -44,7 +44,7 @@ public class Menu
                         //implement option 5
                         break;
                     case 6:
-                        //implement option 6
+                        CountActingCredits(conn);
                         break;
                     case 7: // To quit the program.
                         System.out.println("Exiting Program");
@@ -167,5 +167,34 @@ public class Menu
             stmt.executeQuery(qry);
         }
         System.out.println("\nSuccess\n");
+    }
+
+    public static void DeleteMovie(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.print("Title of the movie: ");
+        String title = keyboard.nextLine();
+
+        String qry = "DELETE FROM Movies WHERE Title='" + title + "'";
+        stmt.executeQuery(qry);
+        
+        System.out.println("\nSuccess\n");
+    }
+
+    public static void CountActingCredits(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.print("Name of Actor/Actress: ");
+        String name = keyboard.nextLine();
+
+        String qry = "SELECT count(PersonName) as count from ActingCredits WHERE PersonName='" + name + "'";
+        ResultSet rs = stmt.executeQuery(qry);
+        
+        rs.next();
+        int count = rs.getInt("count");
+        
+        System.out.format("\n%s has appeared in %d of your movies\n\n", name, count);
     }
 }
