@@ -39,6 +39,7 @@ public class Menu
                         break;
                     case 4:
                         //implement option 4
+                        UpdateStudioQuery(conn);
                         break;
                     case 5:
                         //implement option 5
@@ -230,4 +231,23 @@ public class Menu
 
 
     }
+
+    public static void UpdateStudioQuery(Connection conn)
+    throws SQLException
+    {
+      Scanner keyboard = new Scanner(System.in);
+      System.out.print("Name of studio to change: ");
+      String oldname = keyboard.nextLine();
+      System.out.print("New studio name: ");
+      String newname = keyboard.nextLine();
+
+      Statement stmt = conn.createStatement();
+      String qry = String.format("update Studios set Name='%s' where Name='%s';",
+                                  newname, oldname);
+
+      ResultSet rs = stmt.executeQuery(qry);
+      // Loop through the result set and print the output.
+      // First -- print the output column headings.
+      System.out.println("\nSuccess!\n");
+  }
 }
