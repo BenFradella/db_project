@@ -155,7 +155,17 @@ public class Menu
         String studio = keyboard.nextLine();
 
         String qry = "INSERT INTO Movies SET Title='" + title + "', ReleaseDate='" + releasedate + "'";
-        stmt.executeQuery(qry);
+        if ( studio.length() > 0 ) {
+            qry += ", StudioName='" + studio + "'";
+        }
+
+        try {
+            stmt.executeQuery(qry);
+        } catch (java.sql.SQLIntegrityConstraintViolationException e) {
+            String qry_2 = "INSERT INTO Studios SET Name='" + studio + "'";
+            stmt.executeQuery(qry_2);
+            stmt.executeQuery(qry);
+        }
         System.out.println("\nSuccess\n");
     }
 }
