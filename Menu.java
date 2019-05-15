@@ -32,7 +32,7 @@ public class Menu
                         MovieTitleQuery(conn);
                         break;
                     case 2:
-                        //implement option 2
+                        InsertMovie(conn);
                         break;
                     case 3:
                         //implement option 3
@@ -141,5 +141,21 @@ public class Menu
         }
         System.out.println( );
         rs.close();
+    }
+
+    public static void InsertMovie(Connection conn) throws SQLException {
+        Statement stmt = conn.createStatement();
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.print("Title of the movie: ");
+        String title = keyboard.nextLine();
+        System.out.print("Release date of the movie (YYYY-MM-DD): ");
+        String releasedate = keyboard.nextLine();
+        System.out.print("Studio that produced the movie, if any: ");
+        String studio = keyboard.nextLine();
+
+        String qry = "INSERT INTO Movies SET Title='" + title + "', ReleaseDate='" + releasedate + "'";
+        stmt.executeQuery(qry);
+        System.out.println("\nSuccess\n");
     }
 }
