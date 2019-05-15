@@ -42,6 +42,7 @@ public class Menu
                         break;
                     case 5:
                         //implement option 5
+                        MovieCountQuery(conn);
                         break;
                     case 6:
                         //implement option 6
@@ -85,7 +86,7 @@ public class Menu
         System.out.println(" 2. Insert a movie");
         System.out.println(" 3. Delete a movie");
         System.out.println(" 4. Update a studio name");
-        System.out.println(" 5. Count the Number of movies produced by a studio");
+        System.out.println(" 5. Count the movies produced by each studio");
         System.out.println(" 6. Count the number of movies a person is in");
         System.out.println(" 7. Quit");
         System.out.print("Your choice ==> ");
@@ -95,27 +96,32 @@ public class Menu
         return response;
     }
 
-    // This function lists all student names, IDs and their majors.
-    public static void StudentMajorQuery(Connection conn) throws SQLException
+    // This function counts all movies and groups by studio
+    public static void MovieCountQuery(Connection conn) throws SQLException
     {
-        Statement stmt = conn.createStatement();
-        String qry = "select Title "
-        +
-        "from Movies ";
+      Statement stmt = conn.createStatement();
+      String qry = "select count(StudioName), StudioName "
+      +
+      "from Movies "
+      +
+      "group by StudioName";
 
-        ResultSet rs = stmt.executeQuery(qry);
-        // Loop through the result set and print the output.
-        // First -- print the output column headings.
-        System.out.format("%n");
-        System.out.format("%-12s%n", "Title");
-        // Then -- print the body of the output table.
-        while (rs.next())
-        {
-            String title = rs.getString("Title");
-            System.out.format("%-12s%n", title);
-        }
-        System.out.println();
-        rs.close();
+
+      ResultSet rs = stmt.executeQuery(qry);
+      // Loop through the result set and print the output.
+      // First -- print the output column headings.
+      System.out.format("%n");
+      System.out.format("%-12s%n", "StudioName");
+      // Then -- print the body of the output table.
+      while (rs.next())
+      {
+        String countstudioname = rs.getString("count(StudioName)");
+        System.out.format("%s ", countstudioname);
+        String studioname = rs.getString("StudioName");
+        System.out.format("%s%n", studioname);
+      }
+      System.out.println();
+      rs.close();
     }
 
     // This function is for the query of finding names, IDs and majors
