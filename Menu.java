@@ -200,7 +200,7 @@ public class Menu
         System.out.print("Name of Actor/Actress: ");
         String name = keyboard.nextLine();
 
-        String qry = "SELECT count(PersonName) as count from ActingCredits WHERE PersonName='" + name + "'";
+        String qry = "SELECT count(distinct(MovieName)) as count from ActingCredits WHERE PersonName='" + name + "'";
         ResultSet rs = stmt.executeQuery(qry);
         
         rs.next();
